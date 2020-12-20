@@ -1,18 +1,4 @@
 
-/*
- * Created by K. Suwatchai (Mobizt)
- * 
- * Email: k_suwatchai@hotmail.com
- * 
- * Github: https://github.com/mobizt
- * 
- * Copyright (c) 2019 mobizt
- * 
- * This example is for the beginner
- *
-*/
-
-
 #include "FirebaseESP8266.h"
 #include <ESP8266WiFi.h>
 
