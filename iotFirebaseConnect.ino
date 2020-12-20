@@ -56,7 +56,7 @@ void setup()
   //5. Try to set int data to Firebase
   //The set function returns bool for the status of operation
   //firebaseData requires for sending the data
-  if(Firebase.setInt(firebaseData, "/LED_Status", 1))
+  if(Firebase.setInt(firebaseData, "/huerta/riego/regar", 1))
   {
     //Success
      Serial.println("Set int data success");
@@ -72,7 +72,7 @@ void setup()
   //6. Try to get int data from Firebase
   //The get function returns bool for the status of operation
   //firebaseData requires for receiving the data
-  if(Firebase.getInt(firebaseData, "/LED_Status"))
+  if(Firebase.getInt(firebaseData, "/huerta/riego/regar"))
   {
     //Success
     Serial.print("Get int data success, int = ");
@@ -95,7 +95,7 @@ void setup()
 
   */
 
- if(Firebase.get(firebaseData, "/LED_Status"))
+ if(Firebase.get(firebaseData, "/huerta/riego/regar"))
   {
     //Success
     Serial.print("Get variant data success, type = ");
@@ -135,7 +135,7 @@ void setup()
 void loop()
 {
   
-   if(Firebase.getInt(firebaseData, "/LED_Status"))
+   if(Firebase.getInt(firebaseData, "/huerta/riego/regar"))
   {
     if (firebaseData.intData() == 1)
     {
