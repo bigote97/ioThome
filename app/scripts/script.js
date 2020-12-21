@@ -18,18 +18,21 @@ let estado = Boolean;
 var firebaseRef = firebase.database().ref("huerta");
 firebaseRef.on("value", function(snapshot){
   data = snapshot.val();
-  console.log(data);
+  dataSet();
+})
+function dataSet(params) {
   if (data.hasOwnProperty('riego')) {  
     if (data.riego.regar === 1){
       estado = true;
       document.getElementById("estado").innerHTML = "Regando";
+      document.getElementById("boton").innerHTML = "Dejar de regar";
     } else {
       estado = false;
       document.getElementById("estado").innerHTML = "Riego realizado";
+      document.getElementById("boton").innerHTML = "Regar";
     }
   }
-})
-
+}
 //document.getElementById("boton").onclick = changeState();
 
 function changeState() {
@@ -43,3 +46,19 @@ function changeState() {
     });
   }
 }
+
+function setAutomatizacion(params) {
+  let dia = document.forms[0];
+  let hora = document.forms[1];
+  let minuto = document.forms[2];
+  enviaHorario(dia, hora, minuto);
+}
+function enviaHorario(dia, hora, minuto) {
+  firebase.database().ref('huerta/automatizacion/').set({
+    dias: dia,
+    horaRiego: hora, 
+    minutoRiego: minuto
+  });
+}
+
+
