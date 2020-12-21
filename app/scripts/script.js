@@ -1,3 +1,4 @@
+
 var firebaseConfig = {
   apiKey: "AIzaSyA0MznDVGU_KWFKmEyKHERuedluRGOxflk",
   authDomain: "iot-home-843f7.firebaseapp.com",
@@ -25,11 +26,11 @@ function dataSet(params) {
     if (data.riego.regar === 1){
       estado = true;
       document.getElementById("estado").innerHTML = "Regando";
-      document.getElementById("boton").innerHTML = "Dejar de regar";
+      document.getElementById("boton").innerHTML = "DEJAR DE REGAR";
     } else {
       estado = false;
       document.getElementById("estado").innerHTML = "Riego realizado";
-      document.getElementById("boton").innerHTML = "Regar";
+      document.getElementById("boton").innerHTML = "REGAR";
     }
   }
 }
@@ -47,17 +48,20 @@ function changeState() {
   }
 }
 
-function setAutomatizacion(params) {
-  let dia = document.forms[0];
-  let hora = document.forms[1];
-  let minuto = document.forms[2];
-  enviaHorario(dia, hora, minuto);
+function setAutomatizacion() {
+  // let dia = document.forms[0];
+  // let hora = document.forms[1];
+  // let minuto = document.forms[2];
+  var dias = document.getElementById("dias").value;
+  var horas = document.getElementById("horas").value;
+  var minutos = document.getElementById("minutos").value;
+  enviaHorario(dias, horas, minutos);
 }
-function enviaHorario(dia, hora, minuto) {
+function enviaHorario(dias, horas, minutos) {
   firebase.database().ref('huerta/automatizacion/').set({
-    dias: dia,
-    horaRiego: hora, 
-    minutoRiego: minuto
+    dias: dias,
+    horaRiego: horas, 
+    minutoRiego: minutos
   });
 }
 

@@ -16,43 +16,81 @@
         <a href="https://www.linkedin.com/in/augusto-rossetti-lorea-175622195/">linkedin</a>
       </nav>
     </header>
-    <main>
-      <div class="card huerta-card" style="width: 18rem;">
-        <img src="images/fondo.jpeg" class="card-img-top" alt="Imagen de su huerto">
-        <div class="card-body">
-          <h5 class="card-title">Huerta</h5>
-          <p class="card-text">En esta tarjeta encontraras el estado actual de tu huerta.</p>
-          <p id="estado">ESTADO</p>
-          <button type="button" id="boton" onclick="changeState()" class="btn btn-primary mt-1">Cambiar de estado</button>
-          <button class="btn btn-primary mt-1" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-            configurar
-          </button>
-          <div class="collapse" id="collapseExample">
-            <div class="card card-body">
-              <form action="/action_page.php" class="mt-1" onsubmit="return false">
-                <div class="form-row">
-                  <div class="col-12 my-1">
-                    <label class="mr-sm-2 sr-only" for="inlineFormCustomSelect">Dias</label>
-                    <select class="custom-select mr-sm-2" id="inlineFormCustomSelect" required>
-                      <option selected>Como regar...</option>
-                      <option value="1">todos los dias</option>
-                      <option value="2">cada 2 dias</option>
-                      <option value="3">cada 3 dias</option>
-                    </select>
-                  </div>
+    <main class="container justify-content-center align-items-center">
+      <div class="row">
+        <div class="col-md-4">
+          <div class="card huerta-card">
+            <img src="images/reloj.jpg" class="card-img-top" alt="Imagen de relojes">
+            <div class="card-body">
+              <h5 class="card-title">Reloj</h5>
+              <p class="card-text">En esta tarjeta encontraras un reloj con la hora actual.</p>
+              <P id="fecha">fecha:</P>
+              <p id="horario">hora:</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card huerta-card">
+            <img src="images/fondo.jpeg" class="card-img-top" alt="Imagen de su huerto">
+            <div class="card-body">
+              <h5 class="card-title">Huerta</h5>
+              <p class="card-text">En esta tarjeta encontraras el estado actual de tu huerta.</p>
+              <P>Estado actual:</P>
+              <p id="estado">ESTADO</p>
+              <button type="button" id="boton" onclick="changeState()" class="btn btn-primary mt-1">CAMBIAR DE ESTADO</button>
+              <button class="btn btn-primary mt-1" type="button" data-toggle="collapse" data-target="#collapseHorario" aria-expanded="false" aria-controls="collapseHorario">
+                CONFIGURAR HORARIO
+              </button>
+              <button class="btn btn-primary mt-1" type="button" data-toggle="collapse" data-target="#collapseParametros" aria-expanded="false" aria-controls="collapseParametros">
+                CONFIGURAR PARAMETROS
+              </button>
+              <!-- FORM HORARIOS -->
+              <div class="collapse" id="collapseHorario">
+                <div class="card card-body">
+                  <form action="/action_page.php" class="mt-1" onsubmit="return false">
+                    <div class="form-row">
+                      <div class="col-12 my-1">
+                        <label class="mr-sm-2 sr-only" for="inlineFormCustomSelect">Dias</label>
+                        <select class="custom-select mr-sm-2" id="dias" required>
+                          <option selected>Cuando regar...</option>
+                          <option value="1">Todos los dias</option>
+                          <option value="2">Cada 2 dias</option>
+                          <option value="3">Cada 3 dias</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="form-row">
+                      <div class="col-md-6 mb-3">
+                        <label for="horas">Hora</label>
+                        <input type="text" class="form-control" id="horas" placeholder="Ej: 09" required>
+                      </div>
+                      <div class="col-md-6 mb-3">
+                        <label for="minutos">Minutos</label>
+                        <input type="text" class="form-control" id="minutos" placeholder="Ej: 20" required>
+                      </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary my-1" onclick="setAutomatizacion()" >ENVIAR</button>
+                  </form>
                 </div>
-                <div class="form-row">
-                  <div class="col-md-6 mb-3">
-                    <label for="validationCustom03">Hora</label>
-                    <input type="text" class="form-control" id="validationCustom03" placeholder="Ej: 09" required>
-                  </div>
-                  <div class="col-md-6 mb-3">
-                    <label for="validationCustom03">Minutos</label>
-                    <input type="text" class="form-control" id="validationCustom03" placeholder="Ej: 20" required>
-                  </div>
+              </div>
+              <!-- FORM PARAMETROS -->
+              <div class="collapse" id="collapseParametros">
+                <div class="card card-body">
+                  <form action="/action_page.php" class="mt-1" onsubmit="return false">
+                    <div class="form-row">
+                      <div class="col-md-6 mb-3">
+                        <label for="validationCustom03">Temperatura</label>
+                        <input type="text" class="form-control" id="validationCustom03" placeholder="Ej: 45°" required>
+                      </div>
+                      <div class="col-md-6 mb-3">
+                        <label for="validationCustom03">Humedad</label>
+                        <input type="text" class="form-control" id="validationCustom03" placeholder="Ej: 60%" required>
+                      </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary my-1" onclick="setParametros()" >ENVIAR</button>
+                  </form>
                 </div>
-                <button type="submit" class="btn btn-primary my-1" onclick="setAutomatizacion()" >Submit</button>
-              </form>
+              </div>
             </div>
           </div>
         </div>

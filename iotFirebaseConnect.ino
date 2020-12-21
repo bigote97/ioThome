@@ -1,7 +1,8 @@
 
 #include "FirebaseESP8266.h"
 #include <ESP8266WiFi.h>
-
+#include <NTPClient.h>
+#include <WiFiUdp.h>
 //1. Change the following info
 #define FIREBASE_HOST "iot-home-843f7-default-rtdb.firebaseio.com/"
 #define FIREBASE_AUTH "ylK3aXccHlWQaYr09ft2Dyr8bkhUldt8fm510UJY"
@@ -13,6 +14,10 @@
 //2. Define FirebaseESP8266 data object for data sending and receiving
 FirebaseData firebaseData;
 
+WiFiUDP ntpUDP;
+
+
+NTPClient timeClient(ntpUDP, "south-america.pool.ntp.org", -10800, 60000);
 
 void setup()
 {
@@ -115,7 +120,7 @@ void setup()
 
 
   pinMode(LED_BUILTIN, OUTPUT);
-
+  timeClient.begin();
 }
 
 void loop()
@@ -130,5 +135,8 @@ void loop()
       digitalWrite(LED_BUILTIN, HIGH);  
     }
   }
+  timeClient.update();
+
+  Serial.println(timeClient.getFormattedTime());
   delay(500);
 }
