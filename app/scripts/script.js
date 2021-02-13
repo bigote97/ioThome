@@ -1,14 +1,4 @@
 
-var firebaseConfig = {
-  apiKey: "AIzaSyA0MznDVGU_KWFKmEyKHERuedluRGOxflk",
-  authDomain: "iot-home-843f7.firebaseapp.com",
-  databaseURL: "https://iot-home-843f7-default-rtdb.firebaseio.com",
-  projectId: "iot-home-843f7",
-  storageBucket: "iot-home-843f7.appspot.com",
-  messagingSenderId: "761324482462",
-  appId: "1:761324482462:web:fa51436d6ce6be3ad0f08f",
-  measurementId: "G-DE44SP3Y0W"
-};
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 firebase.analytics();
@@ -49,9 +39,6 @@ function changeState() {
 }
 
 function setAutomatizacion() {
-  // let dia = document.forms[0];
-  // let hora = document.forms[1];
-  // let minuto = document.forms[2];
   var dias = document.getElementById("dias").value;
   var horas = document.getElementById("horas").value;
   var minutos = document.getElementById("minutos").value;
