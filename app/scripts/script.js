@@ -3,31 +3,71 @@
 firebase.initializeApp(firebaseConfig);
 firebase.analytics();
 
-var data = Object;
-let estado = Boolean;
+let data = Object;
+let luces = Object;
+let estadoRiego = Boolean;
+let luzAugus = Boolean;
 
-var firebaseRef = firebase.database().ref("huerta");
-firebaseRef.on("value", function(snapshot){
+var firebaseRiego = firebase.database().ref("huerta");
+firebaseRiego.on("value", function(snapshot){
   data = snapshot.val();
+  console.log(data);
   dataSet();
 })
+
+let firebaseLuces = firebase.database().ref("luces");
+firebaseLuces.on("value", function(snapshot) {
+  luces = snapshot.val()
+  console.log(luces)
+  lucesSet();
+})
+
+function lucesSet(){
+  if (luces.hasOwnProperty('augusto')){
+    if (luces.augusto === 1) {
+      luzAugus = true;
+      console.log('luz prendida');
+      document.getElementById('lampAugus').innerHTML = "apagar";
+    } else {
+      luzAugus = false;
+      document.getElementById('lampAugus').innerHTML = "encender";
+      console.log('luz apagada');
+      
+    }
+  }
+}
+
+
 function dataSet(params) {
   if (data.hasOwnProperty('riego')) {  
     if (data.riego.regar === 1){
-      estado = true;
-      document.getElementById("estado").innerHTML = "Regando";
+      estadoRiego = true;
+      document.getElementById("estadoRiego").innerHTML = "Regando";
       document.getElementById("boton").innerHTML = "DEJAR DE REGAR";
     } else {
-      estado = false;
-      document.getElementById("estado").innerHTML = "Riego realizado";
+      estadoRiego = false;
+      document.getElementById("estadoRiego").innerHTML = "Riego realizado";
       document.getElementById("boton").innerHTML = "REGAR";
     }
   }
 }
 //document.getElementById("boton").onclick = changeState();
 
+document.getElementById('lampAugus').addEventListener('click', function() {
+  console.log('click');
+  if (luzAugus) {
+    firebase.database().ref('luces/').set({
+      augusto: 0,   
+    });
+  } else {
+    firebase.database().ref('luces/').set({
+      augusto: 1,    
+    });
+  }
+})
+
 function changeState() {
-  if (estado) {
+  if (estadoRiego) {
     firebase.database().ref('huerta/riego/').set({
       regar: 0,   
     });
